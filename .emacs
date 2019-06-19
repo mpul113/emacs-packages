@@ -53,6 +53,18 @@
 (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
 
+;;web-mode hooks
+(defun my-web-mode-hook ()
+  "Hooks for Web mode."
+  (setq web-mode-extra-auto-pairs
+      '(("erb"  . (("beg" "end")))
+        ("php"  . (("beg" "end")
+                   ("beg" "end")))
+       ))
+  (setq web-mode-enable-auto-pairing t)
+)
+(add-hook 'web-mode-hook  'my-web-mode-hook)
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -74,6 +86,9 @@
  ;; If there is more than one, they won't work right.
  '(font-lock-string-face ((t (:foreground "orange red")))))
 
+
+;;auto line number mode
+(add-hook 'prog-mode-hook 'linum-mode)
 
 (global-set-key (kbd "M-o") 'other-window)
 (windmove-default-keybindings)
